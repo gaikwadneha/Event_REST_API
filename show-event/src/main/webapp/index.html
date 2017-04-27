@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<script>
+		function loadData(){
+			var i=0;
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET","http://localhost:8080/event-show/api/show",true);
+			xhr.setRequestHeader("Content-Type","application/json");
+			xhr.send();
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4 && xhr.status == 200){
+					var response = JSON.parse(xhr.responseText);
+					var venu ;
+					var str = "";
+					while(i<response.length){
+						venue = response[i].venue;
+						console.log(venue);
+						 str+="id:" +response[i].id+"show name:" +response[i].name + " venue id " +venue.id + " venue name: " +venue.name +"<br>";
+						 
+						i++;
+					}
+					document.getElementById("p1").innerHTML = str;
+				}
+				
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<input type = "submit" onclick = "loadData()" id = "b1">
+		<p id = "p1">test</p>
+	</body>
+</html>
